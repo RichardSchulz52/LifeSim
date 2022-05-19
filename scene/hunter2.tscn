@@ -1,0 +1,95 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scripts/actions/go_to.gd" type="Script" id=1]
+[ext_resource path="res://scripts/conditions/is_near.gd" type="Script" id=2]
+[ext_resource path="res://behavior_tree/nodes/composites/selector.gd" type="Script" id=3]
+[ext_resource path="res://behavior_tree/nodes/composites/sequence.gd" type="Script" id=4]
+[ext_resource path="res://scripts/actions/wander.gd" type="Script" id=5]
+[ext_resource path="res://behavior_tree/nodes/bt_root.gd" type="Script" id=6]
+[ext_resource path="res://behavior_tree/nodes/decorators/inverter.gd" type="Script" id=7]
+[ext_resource path="res://assets/hunter.png" type="Texture" id=8]
+[ext_resource path="res://scripts/actions/find_closest.gd" type="Script" id=9]
+[ext_resource path="res://scripts/actions/consume.gd" type="Script" id=10]
+[ext_resource path="res://scripts/primary/animal.gd" type="Script" id=11]
+[ext_resource path="res://scripts/component_interfaces/steering.gd" type="Script" id=12]
+[ext_resource path="res://scripts/component_interfaces/locomotion.gd" type="Script" id=13]
+[ext_resource path="res://scripts/component_interfaces/eatable.gd" type="Script" id=14]
+[ext_resource path="res://scripts/component_interfaces/eating.gd" type="Script" id=15]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.3608, 16.0386 )
+
+[node name="hunter" type="KinematicBody2D"]
+script = ExtResource( 11 )
+
+[node name="Components" type="Node" parent="."]
+
+[node name="Steering" type="Node" parent="Components"]
+script = ExtResource( 12 )
+
+[node name="Eating" type="Node" parent="Components"]
+script = ExtResource( 15 )
+maxKcal = 2000
+currentKcal = 2000
+kcalDrain = 200
+
+[node name="Eatable" type="Node" parent="Components"]
+script = ExtResource( 14 )
+kcal = 4000
+
+[node name="Locomotion" type="Node" parent="Components"]
+script = ExtResource( 13 )
+speed = 250
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="BehaviorTreeRoot" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="root" type="Node" parent="BehaviorTreeRoot"]
+script = ExtResource( 3 )
+
+[node name="search_food" type="Node" parent="BehaviorTreeRoot/root"]
+script = ExtResource( 4 )
+
+[node name="find_closest_prey" type="Node" parent="BehaviorTreeRoot/root/search_food"]
+script = ExtResource( 9 )
+group_to_detect = "prey"
+var_name = "prey"
+
+[node name="InverterDecorator" type="Node" parent="BehaviorTreeRoot/root/search_food"]
+script = ExtResource( 7 )
+
+[node name="is_prey_near" type="Node" parent="BehaviorTreeRoot/root/search_food/InverterDecorator"]
+script = ExtResource( 2 )
+var_name = "prey"
+detect_radius = 200
+
+[node name="wander" type="Node" parent="BehaviorTreeRoot/root/search_food"]
+script = ExtResource( 5 )
+deviance = 0.3
+
+[node name="hunt" type="Node" parent="BehaviorTreeRoot/root"]
+script = ExtResource( 4 )
+
+[node name="find_closest_prey" type="Node" parent="BehaviorTreeRoot/root/hunt"]
+script = ExtResource( 9 )
+group_to_detect = "prey"
+var_name = "prey"
+
+[node name="is_prey_near" type="Node" parent="BehaviorTreeRoot/root/hunt"]
+script = ExtResource( 2 )
+var_name = "prey"
+detect_radius = 210
+
+[node name="hunt" type="Node" parent="BehaviorTreeRoot/root/hunt"]
+script = ExtResource( 1 )
+var_name = "prey"
+
+[node name="feast" type="Node" parent="BehaviorTreeRoot/root/hunt"]
+script = ExtResource( 10 )
+var_name = "prey"

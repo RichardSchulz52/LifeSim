@@ -1,0 +1,170 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Leaf",
+"class": "ActionLeaf",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/leaves/action.gd"
+}, {
+"base": "Decorator",
+"class": "AlwaysFailDecorator",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/decorators/failer.gd"
+}, {
+"base": "Decorator",
+"class": "AlwaysSucceedDecorator",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/decorators/succeeder.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Animal",
+"language": "GDScript",
+"path": "res://scripts/primary/animal.gd"
+}, {
+"base": "Node",
+"class": "BehaviorTree",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/behavior_tree.gd"
+}, {
+"base": "BehaviorTree",
+"class": "BehaviorTreeNode",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/bt_node.gd"
+}, {
+"base": "BehaviorTree",
+"class": "BehaviorTreeRoot",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/bt_root.gd"
+}, {
+"base": "BehaviorTreeNode",
+"class": "Composite",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/composites/composite.gd"
+}, {
+"base": "Leaf",
+"class": "ConditionLeaf",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/leaves/condition.gd"
+}, {
+"base": "BehaviorTreeNode",
+"class": "Decorator",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/decorators/decorator.gd"
+}, {
+"base": "Node",
+"class": "Eatable",
+"language": "GDScript",
+"path": "res://scripts/component_interfaces/eatable.gd"
+}, {
+"base": "Node",
+"class": "Eating",
+"language": "GDScript",
+"path": "res://scripts/component_interfaces/eating.gd"
+}, {
+"base": "",
+"class": "GitAPI",
+"language": "NativeScript",
+"path": "res://addons/godot-git-plugin/git_api.gdns"
+}, {
+"base": "Decorator",
+"class": "InverterDecorator",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/decorators/inverter.gd"
+}, {
+"base": "BehaviorTreeNode",
+"class": "Leaf",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/leaves/leaf.gd"
+}, {
+"base": "Decorator",
+"class": "LimiterDecorator",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/decorators/limiter.gd"
+}, {
+"base": "Node",
+"class": "Locomotion",
+"language": "GDScript",
+"path": "res://scripts/component_interfaces/locomotion.gd"
+}, {
+"base": "Composite",
+"class": "SelectorComposite",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/composites/selector.gd"
+}, {
+"base": "Composite",
+"class": "SequenceComposite",
+"language": "GDScript",
+"path": "res://behavior_tree/nodes/composites/sequence.gd"
+}, {
+"base": "Node",
+"class": "Steering",
+"language": "GDScript",
+"path": "res://scripts/component_interfaces/steering.gd"
+} ]
+_global_script_class_icons={
+"ActionLeaf": "res://behavior_tree/icons/action.svg",
+"AlwaysFailDecorator": "res://behavior_tree/icons/fail.svg",
+"AlwaysSucceedDecorator": "res://behavior_tree/icons/succeed.svg",
+"Animal": "",
+"BehaviorTree": "",
+"BehaviorTreeNode": "res://behavior_tree/icons/action.svg",
+"BehaviorTreeRoot": "res://behavior_tree/icons/tree.svg",
+"Composite": "res://behavior_tree/icons/category_composite.svg",
+"ConditionLeaf": "res://behavior_tree/icons/condition.svg",
+"Decorator": "res://behavior_tree/icons/category_decorator.svg",
+"Eatable": "",
+"Eating": "",
+"GitAPI": "",
+"InverterDecorator": "res://behavior_tree/icons/inverter.svg",
+"Leaf": "res://behavior_tree/icons/action.svg",
+"LimiterDecorator": "res://behavior_tree/icons/limiter.svg",
+"Locomotion": "",
+"SelectorComposite": "res://behavior_tree/icons/selector.svg",
+"SequenceComposite": "res://behavior_tree/icons/sequencer.svg",
+"Steering": ""
+}
+
+[application]
+
+config/name="LifeSim"
+run/main_scene="res://scene/main.tscn"
+config/icon="res://icon.png"
+
+[gdnative]
+
+singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
+
+[input]
+
+up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
