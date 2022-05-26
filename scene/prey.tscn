@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/prey.png" type="Texture" id=1]
 [ext_resource path="res://scripts/conditions/is_near.gd" type="Script" id=2]
@@ -11,16 +11,21 @@
 [ext_resource path="res://scripts/actions/find_closest.gd" type="Script" id=9]
 [ext_resource path="res://scripts/actions/consume.gd" type="Script" id=10]
 [ext_resource path="res://scripts/primary/animal.gd" type="Script" id=11]
-[ext_resource path="res://scripts/component_interfaces/steering.gd" type="Script" id=12]
-[ext_resource path="res://scripts/component_interfaces/locomotion.gd" type="Script" id=13]
-[ext_resource path="res://scripts/component_interfaces/eating.gd" type="Script" id=14]
-[ext_resource path="res://scripts/component_interfaces/eatable.gd" type="Script" id=15]
+[ext_resource path="res://scripts/components/component_interfaces/steering.gd" type="Script" id=12]
+[ext_resource path="res://scripts/components/component_interfaces/locomotion.gd" type="Script" id=13]
+[ext_resource path="res://scripts/components/component_interfaces/eating.gd" type="Script" id=14]
+[ext_resource path="res://scripts/components/component_interfaces/eatable.gd" type="Script" id=15]
+[ext_resource path="res://scripts/components/mamals/mating.gd" type="Script" id=16]
+[ext_resource path="res://scripts/actions/run_towards.gd" type="Script" id=17]
+[ext_resource path="res://scripts/conditions/can_reproduce.gd" type="Script" id=18]
+[ext_resource path="res://scripts/actions/reproduce.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.3608, 16.0386 )
 
 [node name="Prey" type="KinematicBody2D"]
 script = ExtResource( 11 )
+group_name = "prey"
 
 [node name="Components" type="Node2D" parent="."]
 
@@ -41,6 +46,10 @@ script = ExtResource( 12 )
 script = ExtResource( 13 )
 speed = 200
 
+[node name="Reproduction" type="Node" parent="Components"]
+script = ExtResource( 16 )
+offspring_res = "res://scene/prey.tscn"
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 
@@ -58,7 +67,7 @@ script = ExtResource( 4 )
 
 [node name="find_closest_danger" type="Node" parent="BehaviorTreeRoot/root/evade_danger"]
 script = ExtResource( 9 )
-group_to_detect = "hunters"
+group_to_detect = "hunter"
 var_name = "danger"
 
 [node name="is_danger_near" type="Node" parent="BehaviorTreeRoot/root/evade_danger"]
@@ -90,6 +99,30 @@ var_name = "eatable"
 [node name="consume_plant" type="Node" parent="BehaviorTreeRoot/root/eat"]
 script = ExtResource( 10 )
 var_name = "eatable"
+
+[node name="reproduce" type="Node" parent="BehaviorTreeRoot/root"]
+script = ExtResource( 4 )
+
+[node name="find_mate" type="Node" parent="BehaviorTreeRoot/root/reproduce"]
+script = ExtResource( 9 )
+group_to_detect = "prey"
+var_name = "mate"
+
+[node name="is_mate_near" type="Node" parent="BehaviorTreeRoot/root/reproduce"]
+script = ExtResource( 2 )
+var_name = "mate"
+detect_radius = 200
+
+[node name="can_reproduce" type="Node" parent="BehaviorTreeRoot/root/reproduce"]
+script = ExtResource( 18 )
+
+[node name="run_to_mate" type="Node" parent="BehaviorTreeRoot/root/reproduce"]
+script = ExtResource( 17 )
+var_name = "mate"
+
+[node name="reproduce" type="Node" parent="BehaviorTreeRoot/root/reproduce"]
+script = ExtResource( 19 )
+var_name = "mate"
 
 [node name="search_food" type="Node" parent="BehaviorTreeRoot/root"]
 script = ExtResource( 4 )

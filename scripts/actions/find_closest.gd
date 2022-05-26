@@ -5,6 +5,7 @@ export (String) var var_name
 
 func tick(actor, blackboard):
 	var group_entitys = get_tree().get_nodes_in_group(group_to_detect)
+	group_entitys.erase(actor)
 	if group_entitys.size() == 0:
 		blackboard.set(var_name, null)
 		return SUCCESS

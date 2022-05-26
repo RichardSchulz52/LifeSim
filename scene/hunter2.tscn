@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/actions/go_to.gd" type="Script" id=1]
 [ext_resource path="res://scripts/conditions/is_near.gd" type="Script" id=2]
@@ -11,16 +11,18 @@
 [ext_resource path="res://scripts/actions/find_closest.gd" type="Script" id=9]
 [ext_resource path="res://scripts/actions/consume.gd" type="Script" id=10]
 [ext_resource path="res://scripts/primary/animal.gd" type="Script" id=11]
-[ext_resource path="res://scripts/component_interfaces/steering.gd" type="Script" id=12]
-[ext_resource path="res://scripts/component_interfaces/locomotion.gd" type="Script" id=13]
-[ext_resource path="res://scripts/component_interfaces/eatable.gd" type="Script" id=14]
-[ext_resource path="res://scripts/component_interfaces/eating.gd" type="Script" id=15]
+[ext_resource path="res://scripts/components/component_interfaces/steering.gd" type="Script" id=12]
+[ext_resource path="res://scripts/components/component_interfaces/locomotion.gd" type="Script" id=13]
+[ext_resource path="res://scripts/components/component_interfaces/eatable.gd" type="Script" id=14]
+[ext_resource path="res://scripts/components/component_interfaces/eating.gd" type="Script" id=15]
+[ext_resource path="res://scripts/components/mamals/mating.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.3608, 16.0386 )
 
 [node name="hunter" type="KinematicBody2D"]
 script = ExtResource( 11 )
+group_name = "hunter"
 
 [node name="Components" type="Node" parent="."]
 
@@ -40,6 +42,9 @@ kcal = 4000
 [node name="Locomotion" type="Node" parent="Components"]
 script = ExtResource( 13 )
 speed = 250
+
+[node name="Reproduction" type="Node" parent="Components"]
+script = ExtResource( 16 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 8 )

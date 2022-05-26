@@ -6,7 +6,7 @@ func tick(actor, blackboard):
 	var entity = blackboard.get(var_name)
 	if entity == null:
 		return FAILURE
-	var away_vector = actor.position - entity.position
-	var velocity = away_vector.normalized()
-	actor.steering.direction = velocity
+	var dist = entity.global_position.distance_to(actor.global_position)
+	if dist < 35:
+		actor.reproduction.reproduce(entity)
 	return SUCCESS

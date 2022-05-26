@@ -62,12 +62,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Eatable",
 "language": "GDScript",
-"path": "res://scripts/component_interfaces/eatable.gd"
+"path": "res://scripts/components/component_interfaces/eatable.gd"
 }, {
 "base": "Node",
 "class": "Eating",
 "language": "GDScript",
-"path": "res://scripts/component_interfaces/eating.gd"
+"path": "res://scripts/components/component_interfaces/eating.gd"
 }, {
 "base": "",
 "class": "GitAPI",
@@ -92,7 +92,17 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Locomotion",
 "language": "GDScript",
-"path": "res://scripts/component_interfaces/locomotion.gd"
+"path": "res://scripts/components/component_interfaces/locomotion.gd"
+}, {
+"base": "Reproduction",
+"class": "Mating",
+"language": "GDScript",
+"path": "res://scripts/components/mamals/mating.gd"
+}, {
+"base": "Node",
+"class": "Reproduction",
+"language": "GDScript",
+"path": "res://scripts/components/component_interfaces/reproduction.gd"
 }, {
 "base": "Composite",
 "class": "SelectorComposite",
@@ -107,7 +117,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Steering",
 "language": "GDScript",
-"path": "res://scripts/component_interfaces/steering.gd"
+"path": "res://scripts/components/component_interfaces/steering.gd"
 } ]
 _global_script_class_icons={
 "ActionLeaf": "res://behavior_tree/icons/action.svg",
@@ -127,6 +137,8 @@ _global_script_class_icons={
 "Leaf": "res://behavior_tree/icons/action.svg",
 "LimiterDecorator": "res://behavior_tree/icons/limiter.svg",
 "Locomotion": "",
+"Mating": "",
+"Reproduction": "",
 "SelectorComposite": "res://behavior_tree/icons/selector.svg",
 "SequenceComposite": "res://behavior_tree/icons/sequencer.svg",
 "Steering": ""
