@@ -5,6 +5,7 @@ class_name Eating
 export (int) var maxKcal
 export (int) var currentKcal
 export (int) var kcalDrain
+export (Array) var eatingGroups
 
 func eat(entity):
 	assert("eatable" in entity)

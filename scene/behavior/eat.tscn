@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/actions/consume.gd" type="Script" id=1]
+[ext_resource path="res://scripts/actions/go_to.gd" type="Script" id=2]
+[ext_resource path="res://scripts/actions/find_closest_eatable.gd" type="Script" id=3]
+[ext_resource path="res://behavior_tree/nodes/composites/sequence.gd" type="Script" id=4]
+[ext_resource path="res://scripts/conditions/is_near.gd" type="Script" id=5]
+
+[node name="eat" type="Node"]
+script = ExtResource( 4 )
+
+[node name="find_closest_eatable" type="Node" parent="."]
+script = ExtResource( 3 )
+var_name = "eatable"
+
+[node name="is_eatable_near" type="Node" parent="."]
+script = ExtResource( 5 )
+var_name = "eatable"
+detect_radius = 200
+
+[node name="go_to_eatable" type="Node" parent="."]
+script = ExtResource( 2 )
+var_name = "eatable"
+
+[node name="consume" type="Node" parent="."]
+script = ExtResource( 1 )
+var_name = "eatable"
