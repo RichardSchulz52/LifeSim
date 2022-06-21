@@ -3,7 +3,6 @@ A life simulation in the godot engine. Currently there are hunters, prey and pla
 The project is made with behaviour trees and proper composition. Plants are spawned with a chance related to the number of availabe grass tiles.
 
 TODOs
-* reproduction of hunters
 * split animals by the only two genders
 * make a plant reproduction system so the prey can die if they overconsume/reproduce
 * make the UI addaptive the the camera size
