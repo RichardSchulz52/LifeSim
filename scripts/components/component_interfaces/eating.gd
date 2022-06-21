@@ -19,3 +19,6 @@ func digest(entity, delta):
 	currentKcal -= delta * kcalDrain
 	if currentKcal < 0:
 		entity.queue_free()
+		
+func kcalPercentage():
+	return (currentKcal / maxKcal) * 100

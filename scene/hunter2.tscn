@@ -49,6 +49,7 @@ speed = 250
 [node name="Reproduction" type="Node" parent="Components"]
 script = ExtResource( 16 )
 mating_cooldown_seconds = 5
+offspring_res = "res://scene/hunter2.tscn"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 8 )
